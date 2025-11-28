@@ -12,7 +12,12 @@ cask "olovebar" do
   desc "Menu bar utility"
   homepage "https://github.com/SacrilegeWasTaken/olovebar"
 
-  app "OLoveBar.app"
+  postflight do
+    system "xattr -d com.apple.quarantine #{staged_path}/OLoveBar.app"
+    system "xattr -d com.apple.quarantine #{appdir}/OLoveBar.app"
+  end
+
+  app "OLoveBar.app", target: "#{appdir}/OLoveBar.app"
 
   uninstall quit: "com.sacrilege.olovebar"
 
