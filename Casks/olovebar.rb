@@ -7,13 +7,19 @@ cask "olovebar" do
   desc "Menu bar utility"
   homepage "https://github.com/SacrilegeWasTaken/olovebar"
 
-  # Снимаем карантин после установки
+  # Ensure quarantine is removed only when files exist
   postflight do
-    system "xattr -r -d com.apple.quarantine #{staged_path}/OLoveBar.app 2>/dev/null || true"
-    system "xattr -r -d com.apple.quarantine #{appdir}/OLoveBar.app 2>/dev/null || true"
+    if File.exist?("#{staged_path}/OLoveBar.app")
+      system "xattr", "-r", "-d", "com.apple.quarantine", "#{staged_path}/OLoveBar.app"
+    end
+
+    if File.exist?("#{appdir}/OLoveBar.app")
+      system "xattr", "-r", "-d", "com.apple.quarantine", "#{appdir}/OLoveBar.app"
+    end
   end
 
-  app "OLoveBar.app"
+  # Install explicitly into the system Applications folder
+  app "OLoveBar.app", target: "#{appdir}/OLoveBar.app"
 
   uninstall quit: "com.sacrilege.olovebar"
 
