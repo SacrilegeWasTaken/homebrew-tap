@@ -13,11 +13,11 @@ cask "olovebar" do
   homepage "https://github.com/SacrilegeWasTaken/olovebar"
 
   postflight do
-    system "xattr -d com.apple.quarantine #{staged_path}/OLoveBar.app"
-    system "xattr -d com.apple.quarantine #{appdir}/OLoveBar.app"
+    system "xattr -d com.apple.quarantine #{staged_path}/OLoveBar.app 2>/dev/null || true"
+    system "xattr -d com.apple.quarantine #{appdir}/OLoveBar.app 2>/dev/null || true"
   end
 
-  app "OLoveBar.app", target: "#{appdir}/OLoveBar.app"
+  app "OLoveBar.app", target: "#{appdir}"
 
   uninstall quit: "com.sacrilege.olovebar"
 
