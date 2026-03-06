@@ -1,8 +1,8 @@
 cask "olovebar" do
-  version "1.3.0"
+  version :latest
   sha256 :no_check
 
-  url "https://github.com/SacrilegeWasTaken/olovebar/releases/download/#{version}/OLoveBar.dmg"
+  url "https://github.com/SacrilegeWasTaken/olovebar/releases/download/latest/OLoveBar.dmg"
   name "OLoveBar"
   desc "Menu bar utility"
   homepage "https://github.com/SacrilegeWasTaken/olovebar"
